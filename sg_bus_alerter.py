@@ -25,15 +25,15 @@ def get_bus_arrivals(current_time, bus_stop_code, bus_number):
     try:
         response = requests.get(url, headers=headers, params=params)
         data = response.json()
-        message = f"🚌 *Bus Arrival at {bus_stop_code}*\n"
+        message = ""
         service = data['Services'][0]
         est = service["NextBus"]["EstimatedArrival"]
         est_formatted = datetime.strptime(est, DATETIME_FORMAT)
         time_left = int(((est_formatted - current_time).total_seconds()) // 60)
         if time_left <= 0:
-            message += f"- Bus {bus_number}: Arriving soon\n"
+            message += f"🚌 *Bus {bus_number}: Arriving soon*\n"
         elif time_left <= 10:
-            message += f"- Bus {bus_number}: {time_left} min\n"
+            message += f"🚌 *Bus {bus_number} arriving in {time_left} min*\n"
         return message
     except Exception as e:
         return f"Error fetching bus arrivals: {e}"
@@ -62,4 +62,5 @@ if __name__ == "__main__":
     if today_morning_start <= current_time <= today_morning_end:
         bus_msg = get_bus_arrivals(current_time, MORNING_BUS_STOP_CODE, MORNING_BUS)
 
-    send_telegram_message(bus_msg)
+    if bus_msg != "":
+        send_telegram_message(bus_msg)

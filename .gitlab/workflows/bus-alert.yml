@@ -1,0 +1,28 @@
+name: Daily Bus Alert
+
+on:
+  schedule:
+    - cron: '* * * * *'  # UTC 9 AM == 5 PM Singapore Time (+8)
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests pytz
+
+      - name: Run bus alert script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          LTA_API_KEY: ${{ secrets.LTA_API_KEY }}
+          BUS_STOP_CODE: ${{ secrets.BUS_STOP_CODE }}
+        run: python script.py

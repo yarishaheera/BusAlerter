@@ -23,5 +23,5 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TEL_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-          LTA_API_KEY: ${{ secrets.LTA__KEY }}
-        run: python script.py
+          LTA_API_KEY: ${{ secrets.LTA_KEY }}
+        run: python sg_bus_alerter.py

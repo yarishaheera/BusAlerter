@@ -63,6 +63,8 @@ if __name__ == "__main__":
     bus_msg = ""
     if today_morning_start <= current_time <= today_morning_end:
         bus_msg = get_bus_arrivals(current_time, MORNING_BUS_STOP_CODE, MORNING_BUS)
+    elif today_evening_start <= current_time <= today_evening_end:
+        bus_msg = get_bus_arrivals(current_time, EVENING_BUS_STOP_CODE, EVENING_BUS)
 
     if bus_msg != "":
         send_telegram_message(bus_msg)

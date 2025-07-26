@@ -3,6 +3,7 @@ name: Daily Bus Alert
 on:
   schedule:
     - cron: '* * * * *'  # UTC 9 AM == 5 PM Singapore Time (+8)
+  workflow_dispatch:
 
 jobs:
   alert:

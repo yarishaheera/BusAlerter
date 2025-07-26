@@ -52,11 +52,13 @@ def send_telegram_message(msg):
 
 if __name__ == "__main__":
     current_time = datetime.now(SG_TIMEZONE)
-    # today_morning_start = current_time.replace(hour=9, minute=30, second=0, microsecond=0)
-    # today_morning_end = current_time.replace(hour=10, minute=0, second=0, microsecond=0)
+    today_morning_start = current_time.replace(hour=9, minute=30, second=0, microsecond=0)
+    today_morning_end = current_time.replace(hour=10, minute=0, second=0, microsecond=0)
 
-    today_morning_start = current_time.replace(hour=13, minute=0, second=0, microsecond=0)
-    today_morning_end = current_time.replace(hour=14, minute=0, second=0, microsecond=0)
+    today_evening_start = current_time.replace(hour=14, minute=0, second=0, microsecond=0)
+    today_evening_end = current_time.replace(hour=15, minute=0, second=0, microsecond=0)
+
+
 
     bus_msg = ""
     if today_morning_start <= current_time <= today_morning_end:
